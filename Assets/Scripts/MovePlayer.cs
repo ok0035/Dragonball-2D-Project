@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour {
 
-    public float moveSpeed = 15f;
-    public float drag = 0.5f;
+    private const float moveSpeedConst = 0.2f;
+    public float moveSpeed = 7f;
     public Vector2 moveVector { set; get; }
     public VirtualJoyStick joystick;
 
     private Rigidbody2D thisRigidbody;
-    private Transform transform;
 
     // Use this for initialization
     void Start () {
 
         thisRigidbody = gameObject.AddComponent<Rigidbody2D>();
         thisRigidbody.gravityScale = 0;
-        transform = GetComponent<Transform>();
 	}
 	
 	// Update is called once per frame
@@ -37,11 +35,9 @@ public class MovePlayer : MonoBehaviour {
     private Vector2 PoolInput()
     {
         Vector2 dir = Vector2.zero;
-        //dir.x = Input.GetAxis("Horizontal");
-        //dir.z = Input.GetAxis("Vertical");
 
-        dir.x = joystick.Horizontal() * 0.1f * moveSpeed;
-        dir.y = joystick.Vertical() * 0.1f * moveSpeed;
+        dir.x = joystick.Horizontal() * 0.2f * moveSpeed;
+        dir.y = joystick.Vertical() * 0.2f * moveSpeed;
 
         if (dir.magnitude > 1) dir.Normalize();
 

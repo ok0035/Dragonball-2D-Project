@@ -8,7 +8,7 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 {
     private Image bgImg;
     private Image joystickImg;
-    private Vector3 inputVector;
+    private Vector2 inputVector;
 
     private void Start()
     {
@@ -30,13 +30,14 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
             pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y);
             Debug.Log(bgImg.rectTransform.sizeDelta.x);
 
-            inputVector = new Vector3(pos.x * 2, 0, pos.y * 2);
+            inputVector = new Vector2(pos.x * 2, pos.y * 2);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
             //Move Joystick IMG
             joystickImg.rectTransform.anchoredPosition =
-                new Vector3(inputVector.x * (bgImg.rectTransform.sizeDelta.x / 2),
-                            inputVector.z * (bgImg.rectTransform.sizeDelta.y / 2));
+                new Vector2(inputVector.x * (bgImg.rectTransform.sizeDelta.x / 2),
+                            inputVector.y * (bgImg.rectTransform.sizeDelta.y / 2));
+
             Debug.Log(pos);
         }
 
@@ -49,8 +50,8 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
-        inputVector = Vector3.zero;
-        joystickImg.rectTransform.anchoredPosition = Vector3.zero;
+        inputVector = Vector2.zero;
+        joystickImg.rectTransform.anchoredPosition = Vector2.zero;
     }
 
     public float Horizontal()
@@ -61,7 +62,7 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 
     public float Vertical()
     {
-        if (inputVector.z != 0) return inputVector.z;
+        if (inputVector.y != 0) return inputVector.y;
         else return Input.GetAxis("Vertical");
     }
 }
