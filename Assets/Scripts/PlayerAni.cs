@@ -20,8 +20,8 @@ public class PlayerAni : MonoBehaviour {
 
     public void ChangeAni(int aniNumber)
     {
+        anim = GetComponent<Animator>();
         anim.SetInteger("aniName", aniNumber);
-        print("애니넘버 : " + aniNumber);
     }
 
 	// Update is called once per frame

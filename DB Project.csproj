@@ -226,11 +226,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CharacterParams.cs" />
+    <Compile Include="Assets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\Scripts\MemoryPool.cs" />
+    <Compile Include="Assets\Scripts\MoveEnergypa.cs" />
     <Compile Include="Assets\Scripts\MovePlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerAni.cs" />
+    <Compile Include="Assets\Scripts\PlayerEnergypa.cs" />
     <Compile Include="Assets\Scripts\PlayerFSM.cs" />
     <Compile Include="Assets\Scripts\PlayerParams.cs" />
     <Compile Include="Assets\Scripts\ScrollingBackground.cs" />
+    <Compile Include="Assets\Scripts\SkillEnergypa.cs" />
+    <Compile Include="Assets\Scripts\SkillKI.cs" />
     <Compile Include="Assets\Scripts\VirtualJoyStick.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
