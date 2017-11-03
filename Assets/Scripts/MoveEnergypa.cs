@@ -9,11 +9,18 @@ public class MoveEnergypa : MonoBehaviour {
     public float DestroyXPos;   // 미사일이 사라지는 지점
     public GameObject Explosion;
 
+    private Params param;
+    private GameObject player;
+    private PlayerParams playerParams;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+    // Use this for initialization
+    void Start () {
+        param = GetComponent<Params>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerParams = player.GetComponent<PlayerParams>();
+        param.KI = (int)(playerParams.KI * 0.7);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,9 +41,29 @@ public class MoveEnergypa : MonoBehaviour {
         {
             Debug.Log("충돌");
             Instantiate(Explosion, collision.transform.position, collision.transform.rotation);
-            //Destroy(Explosion);
-            Destroy(gameObject);
+            collision.GetComponent<Params>();
+            SoundManager.instance.PlayExplosionSound();
+
+            int myAttack = param.GetRandomAttack();
+            int opAttack = collision.GetComponent<Params>().GetRandomAttack();
             
+            if (opAttack < collision.GetComponent<Params>().KI)
+            {
+                playerParams.AddScore((int)(opAttack * 0.05));
+                playerParams.AddKI((int)(opAttack * 0.01));
+            }
+            else
+            {
+                playerParams.AddScore((int)(collision.GetComponent<Params>().KI * 0.05));
+                playerParams.AddKI((int)(collision.GetComponent<Params>().KI * 0.01));
+            }
+
+            collision.GetComponent<Params>().minusKI(myAttack);
+            param.minusKI(opAttack);
+
+            if (param.KI <= 0) Destroy(gameObject);
+            if (collision.GetComponent<Params>().KI <= 0) Destroy(collision.gameObject);
+
         }
     }
 }

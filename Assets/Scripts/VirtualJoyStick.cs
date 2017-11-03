@@ -25,10 +25,10 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
                                                                    eventData.pressEventCamera,
                                                                    out pos))
         {
-            Debug.Log("pos.x : " + pos.x);
+            //Debug.Log("pos.x : " + pos.x);
             pos.x = (pos.x / bgImg.rectTransform.sizeDelta.x);
             pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y);
-            Debug.Log(bgImg.rectTransform.sizeDelta.x);
+            //Debug.Log(bgImg.rectTransform.sizeDelta.x);
 
             inputVector = new Vector2(pos.x * 2, pos.y * 2);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
@@ -38,7 +38,7 @@ public class VirtualJoyStick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
                 new Vector2(inputVector.x * (bgImg.rectTransform.sizeDelta.x / 2),
                             inputVector.y * (bgImg.rectTransform.sizeDelta.y / 2));
 
-            Debug.Log(pos);
+            //Debug.Log(pos);
         }
 
     }

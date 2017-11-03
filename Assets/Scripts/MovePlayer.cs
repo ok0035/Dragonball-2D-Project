@@ -2,26 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlayer : MonoBehaviour {
+public class MovePlayer : MonoBehaviour
+{
 
     private const float moveSpeedConst = 0.1f;
     public float moveSpeed = 2f;
     public Vector2 moveVector { set; get; }
+
+    public bool MoveFlag
+    {
+        get
+        {
+            return moveFlag;
+        }
+
+        set
+        {
+            moveFlag = value;
+        }
+    }
+
     public VirtualJoyStick joystick;
-    public bool moveFlag;
+    private bool moveFlag = true;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
-        moveFlag = true;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         Move();
-	}
+    }
 
     private void Move()
     {
@@ -31,22 +47,33 @@ public class MovePlayer : MonoBehaviour {
 
         if (moveFlag)
         {
-            if (moveVector.x < 0)
+            if (fsm.CurrentState == PlayerFSM.State.ATTACK)
             {
-                fsm.currentState = PlayerFSM.State.BACK;
+
+            }
+            else if (moveVector.x < 0)
+            {
+                //fsm.CurrentState = PlayerFSM.State.BACK;
+                fsm.ChangeState(PlayerFSM.State.BACK, PlayerAni.ANI_BACK);
             }
             else if (moveVector.x > 0)
             {
-                fsm.currentState = PlayerFSM.State.GO;
+                //fsm.CurrentState = PlayerFSM.State.GO;
+                fsm.ChangeState(PlayerFSM.State.GO, PlayerAni.ANI_GO);
+            }
+            else if (moveVector.y != 0)
+            {
+                //fsm.CurrentState = PlayerFSM.State.GO;
+                fsm.ChangeState(PlayerFSM.State.Idle, PlayerAni.ANI_IDLE);
             }
             else
             {
-                fsm.currentState = PlayerFSM.State.Idle;
+                //fsm.CurrentState = PlayerFSM.State.Idle;
+                fsm.ChangeState(PlayerFSM.State.Idle, PlayerAni.ANI_IDLE);
             }
             transform.position += new Vector3(moveVector.x, moveVector.y, 0);
         }
 
-        
     }
 
     private Vector2 PoolInput()

@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 14eaa6fdff387e24286ea4d2aafe47f0
+timeCreated: 1509727257
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sndHitEnemy: {instanceID: 0}
+  - sndEnemyAttack: {instanceID: 0}
+  - sndEnemyDie: {instanceID: 0}
+  - sndKI: {instanceID: 0}
+  - sndGameOver: {instanceID: 0}
+  - sndOpening: {fileID: 8300000, guid: b79b2434b25565d4483ec9bfe1f92f38, type: 3}
+  - sndEnergypa: {instanceID: 0}
+  - sndExplosion: {instanceID: 0}
+  - sndBackground: {instanceID: 0}
+  - sndDieSound: {instanceID: 0}
+  - sndFinalFresh: {instanceID: 0}
+  - sndKidBooBlast: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
